@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 BASE_DIR = path.abspath(path.dirname(__file__))
 load_dotenv(path.join(BASE_DIR, ".env"))
 
-MYSQL_HOST = 'localhost'
+MYSQL_HOST = '192.168.2.3'
 MYSQL_CONN = pymysql.connect(
     host=MYSQL_HOST,
     port=3306,
