@@ -1,7 +1,5 @@
 from main import init_app
 
-import sys
-print (sys.path)
 
 app = init_app()
 
