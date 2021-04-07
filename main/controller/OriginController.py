@@ -1,4 +1,4 @@
-from model.config import conn_mysqldb
+from ..model.config import conn_mysqldb
 import pandas as pd
 
 

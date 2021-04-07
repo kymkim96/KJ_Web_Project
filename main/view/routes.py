@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.express as px
 import plotly
 import json
-from controller import OriginController
+from ..controller import OriginController
 
 
 @app.route('/')
