@@ -2,10 +2,10 @@ from ..model.config import conn_mysqldb
 import pandas as pd
 
 
-def get_data():
+def get_data(name, description):
     conn = conn_mysqldb()
     # cursor = conn.cursor()
-    sql = "select * from idg_country_of_origin_34_ill_count"
+    sql = f"select * from {name}_{description}"
     # cursor.execute(sql)
     data = pd.read_sql(sql, conn)
     # data = cursor.fetchall()

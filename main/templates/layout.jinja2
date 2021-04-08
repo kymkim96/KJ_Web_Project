@@ -28,8 +28,8 @@
           <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
             <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Main dashboard</span>
           </a>
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple active">
-            <i class="fas fa-chart-area fa-fw me-3"></i><span>Webiste traffic </span>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+            <i class="fas fa-chart-area fa-fw me-3"></i><span>Webiste </span>
           </a>
           <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
               class="fas fa-lock fa-fw me-3"></i><span>Password</span></a>
@@ -182,15 +182,20 @@
             <div class="my-4 w-100" id="myChart" height="380">
                 <div id="plotly-origin"></div>
             </div>
+
             <script>
-                let graph = 0;
                 $.ajax({
                     method: 'get',
-                    url:'http://localhost:8090/plotly-test',
+                    url:'http://localhost:8090/plotly',
+                    data: {
+                      name: 'IDG_COUNTRY_OF_ORIGIN_34',
+                      description: 'ill_count',
+
+                    },
                     success: (data) => {
                         let inner_data = JSON.parse(data);
-                        graph = inner_data.data;
-                        Plotly.newPlot('plotly-origin', graph, {});
+                        const {data: graph, layout} = inner_data;
+                        Plotly.newPlot('plotly-origin', graph, layout);
                     }
                 });
             </script>
@@ -600,9 +605,9 @@
   </main>
   <!--Main layout-->
   <!-- MDB -->
-  <script type="text/javascript" src="js/mdb.min.js"></script>
+<!--  <script type="text/javascript" src="js/mdb.min.js"></script>-->
   <!-- Custom scripts -->
-  <script type="text/javascript" src="js/admin.js"></script>
+<!--  <script type="text/javascript" src="js/admin.js"></script>-->
 
 </body>
 
