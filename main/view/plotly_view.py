@@ -11,11 +11,17 @@ from ..controller import PlotlyController
 def plotly_test():
     name = request.args.get('name')
     description = request.args.get('description')
+    title = request.args.get('title')
+    value = request.args.get('value')
+    index = request.args.get('index')
+
+    title = f'{title} 별 {value}'
 
     data = PlotlyController.get_data(name, description)
+    column_name = data.columns[1]
     data.set_index(name, inplace=True)
-    data.sort_values('count', ascending=False, inplace=True)
-    fig = px.bar(data, title="원산지 별 적발 건수",
-                 labels={'value': '적발건수', 'index': '품목의 원산지'})
+    data.sort_values(column_name, ascending=False, inplace=True)
+    fig = px.bar(data, title=title,
+                 labels={'value': value, 'index': index})
     plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return plot_json
