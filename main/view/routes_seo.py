@@ -9,7 +9,7 @@ from ..controller import PlotlyController
 
 
 @app.route('/item')
-def location():
+def item():
     return render_template('layout_seo.html', active={
         'trd': None,
         'total': None,
@@ -34,7 +34,7 @@ def location():
         ('해당품목의 금액 (TJS)', 'COR_FINANCIAL_VALUE'),
         ('해당품목의 금액 단위', 'COR_CURRENCY'),
         ('해당품목의 관세부과방법', 'COV_CUST_VALUE_METHOD')
-    ]), sub_index_list=[], init_list=['발송국가/수출국가 코드', 'IMP_CNT_OF_DISPATCH_EXP_CD_15'])
+    ]), sub_index_list=[2,3], init_list=['발송국가/수출국가 코드', 'IMP_CNT_OF_DISPATCH_EXP_CD_15'])
 #
 # @app.route('/rep')
 # def rep():
