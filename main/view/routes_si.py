@@ -30,7 +30,7 @@ def home():
         ('상품의 위치', 'LOC_LOCATION_NAME_30'),
         ('상품의 위치 코드', 'OFF_CODE_30'),
         ('거래국가코드', 'IMP_TRADING_COUNTRY_11')
-    ]), sub_index_list=[])
+    ]), sub_index_list=[], init_list=['발송국가/수출국가 코드', 'IMP_CNT_OF_DISPATCH_EXP_CD_15'])
 
 @app.route('/location')
 def location():
