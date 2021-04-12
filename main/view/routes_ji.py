@@ -45,7 +45,7 @@ def total():
     }, classification_list=enumerate([
         ('총수량', 'CUS_TOTAL_NUMBER_OF_ITEMS_5'),
         ('총중량', 'CUS_TOTAL_NUMBER_OF_PACKAGES_6')
-    ]), sub_index_list=[1], init_list=['총수량', 'CUS_TOTAL_NUMBER_OF_ITEMS_5'])
+    ]), sub_index_list=[], init_list=['총수량', 'CUS_TOTAL_NUMBER_OF_ITEMS_5'])
 
 @app.route('/con')
 def con():
@@ -66,4 +66,4 @@ def con():
         ('수령인 국적', 'CON_COUNTRY_8'),
         ('수령인', 'CON_ADDR_8'),
         ('수령인 주소', 'CON_TIN_8')
-    ]), sub_index_list=[1], init_list=['수령인', 'CON_NAME_8'])
+    ]), sub_index_list=[], init_list=['수령인', 'CON_NAME_8'])
