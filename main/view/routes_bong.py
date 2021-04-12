@@ -1,48 +1,50 @@
-# from flask import render_template, jsonify, request
-# from flask import current_app as app
-# import pandas as pd
-# import plotly.express as px
-# import plotly
-# import json
-# import pickle
-# from ..controller import PlotlyController
-#
-#
-# @app.route('/location')
-# def location():
-#     return render_template('layout_si.jinja2', active={
-#         'trd': None,
-#         'total': None,
-#         'con': None,
-#         'currency': None,
-#         'dnt': None,
-#         'delivery': None,
-#         'location': 'active',
-#         'item': None,
-#         'rep': None,
-#         'person': None
-#     }, classification_list=enumerate([
-#         ('발송국가/수출국가 코드', 'IMP_CNT_OF_DISPATCH_EXP_CD_15'),
-#         ('원산지', 'IMP_COUNTRY_OF_ORIGIN_16'),
-#         ('상품의 위치', 'LOC_LOCATION_NAME_30'),
-#         ('상품의 위치 코드', 'OFF_CODE_30'),
-#         ('거래국가코드', 'IMP_TRADING_COUNTRY_11')
-#     ]), sub_index_list=[], init_list=['발송국가/수출국가 코드', 'IMP_CNT_OF_DISPATCH_EXP_CD_15'])
-#
-# @app.route('/rep')
-# def rep():
-#     return render_template('layout_si.jinja2', active={
-#         'trd': None,
-#         'total': None,
-#         'con': None,
-#         'currency': None,
-#         'dnt': None,
-#         'delivery': None,
-#         'location': None,
-#         'item': None,
-#         'rep': 'active',
-#         'person': None
-#     }, classification_list=enumerate([
-#         ('관세사 식별번호', 'REP_TIN_54'),
-#         ('관세사 이름', 'PERSON_NAME_54'),
-#     ]), sub_index_list=[1], init_list=['관세사 식별번호', 'REP_TIN_54'])
+from flask import render_template, jsonify, request
+from flask import current_app as app
+import pandas as pd
+import plotly.express as px
+import plotly
+import json
+import pickle
+from ..controller import PlotlyController
+
+
+@app.route('/delivery')
+def delivery():
+    return render_template('layout_bong.html', active={
+        'trd': None,
+        'total': None,
+        'con': None,
+        'currency': None,
+        'dnt': None,
+        'delivery': 'active',
+        'location': None,
+        'item': None,
+        'rep': None,
+        'person': None
+    }, classification_list=enumerate([
+        ('컨테이너', 'IMP_CONTAINER_FLAG_19'),
+        ('운송조건', 'IMP_COUNTRY_OF_ORIGIN_16'),
+        ('운송장소', 'DEL_PLACE_OF_DELIVERY_20'),
+        ('국경에서의 운송 수단', 'IMP_INLAND_TRANSPORT_MODE_25'),
+        ('국내 교통 수단', 'IMP_TRANSPORT_MODE_AT_BODR_26')
+    ]), sub_index_list=[], init_list=['컨테이너', 'IMP_CONTAINER_FLAG_19'])
+
+@app.route('/person')
+def person():
+    return render_template('layout_bong.html', active={
+        'trd': None,
+        'total': None,
+        'con': None,
+        'currency': None,
+        'dnt': None,
+        'delivery': None,
+        'location': None,
+        'item': None,
+        'rep': None,
+        'person': "active"
+    }, classification_list=enumerate([
+        ('대리인', 'PERSON_POSITION_54'),
+        ('참조 대리인', 'GEND_REFERENCE_54'),
+        ('발행일 ','GEND_ISSUE_DATE_54'),
+        ('접수일자','ACCEPTANCE_DATE')
+    ]), sub_index_list=[], init_list=['대리인', 'PERSON_POSITION_54'])
