@@ -29,22 +29,22 @@ def delivery():
         ('국내 교통 수단', 'IMP_TRANSPORT_MODE_AT_BODR_26')
     ]), sub_index_list=[], init_list=['컨테이너', 'IMP_CONTAINER_FLAG_19'])
 
-@app.route('/delivery')
-def delivery():
+@app.route('/person')
+def person():
     return render_template('layout_bong.html', active={
         'trd': None,
         'total': None,
         'con': None,
         'currency': None,
         'dnt': None,
-        'delivery': "active",
+        'delivery': None,
         'location': None,
         'item': None,
-        'rep': 'active',
-        'person': None
+        'rep': None,
+        'person': "active"
     }, classification_list=enumerate([
         ('대리인', 'PERSON_POSITION_54'),
-        ('관세사 이름', 'GEND_REFERENCE_54'),
-        ('대리인 ','GEND_ISSUE_DATE_54'),
+        ('참조 대리인', 'GEND_REFERENCE_54'),
+        ('발행일 ','GEND_ISSUE_DATE_54'),
         ('접수일자','ACCEPTANCE_DATE')
-    ]), sub_index_list=[1], init_list=['관세사 식별번호', 'REP_TIN_54'])
+    ]), sub_index_list=[], init_list=['대리인', 'PERSON_POSITION_54'])
