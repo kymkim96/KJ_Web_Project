@@ -8,7 +8,7 @@ def init_app():
 
     with app.app_context():
         from .view import \
-            routes_si, plotly_view
+            routes_si, plotly_view, routes_seo, routes_young, routes_bong, routes_ji
 
         # from plotlydash.dashboard import init_dashboard
         # app = init_dashboard(app)
