@@ -199,20 +199,20 @@
                             type="button"
                             class="list-group-item list-group-item-action sigyung-item-group"
                             aria-current="true"
-                            onclick=""
+                            onclick="get_plotly()"
                           >
                               {{ test }}
                           </button>
                       {% endfor %}
                     </div>
-                    <div id="plotly-origin" class="p-3">asdf</div>
+                    <div id="plotly-origin">asdf</div>
                 </div>
             </div>
 
             <script>
                 let id = 1
                 const get_plotly = () => {
-                    $(".sigyung-item-group").removeClass("active")
+                     $(".sigyung-item-group").removeClass("active")
                      $("#" + event.target.id).addClass("active")
                      $.ajax({
                         method: 'get',

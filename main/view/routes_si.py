@@ -10,6 +10,7 @@ from ..controller import PlotlyController
 
 @app.route('/')
 def home():
+    # data = PlotlyController.get_test_data()
     return render_template('home.jinja2', active={
         'model': 'active',
         'trd': None,
@@ -223,18 +224,18 @@ def item():
         'person': None,
         'nation': None
     }, classification_list=enumerate([
-        ('화물장치공간 및 화물설명', 'GDS_GOODS_DESCRIPTION_31'),
-        ('품목의 순서번호', 'GDS_ITEM_NUMBER_32'),
         ('HS코드', 'COM_COMBINED_NOMENCLATURE_33'),
         ('해당품목의 원산지코드', 'IDG_COUNTRY_OF_ORIGIN_34'),
-        ('해당품목의 총중량 (kg)', 'GDS_GROSS_MASS_35'),
+        ('품목의 순서번호', 'GDS_ITEM_NUMBER_32'),
         ('절차1', 'IDG_PROCEDURE_REQUESTED_37'),
         ('절차2', 'IDG_PREVIOUS_PROCEDURE_37'),
         ('절차3', 'IDG_ADD_NATIONAL_PROC_37'),
+        ('해당품목의 관세부과방법', 'COV_CUST_VALUE_METHOD'),
         ('해당품목의 순중량 (kg)', 'IDG_NET_MASS_38'),
+        ('해당품목의 총중량 (kg)', 'GDS_GROSS_MASS_35'),
         ('해당품목의 금액 (TJS)', 'COR_FINANCIAL_VALUE'),
         ('해당품목의 금액 단위', 'COR_CURRENCY'),
-        ('해당품목의 관세부과방법', 'COV_CUST_VALUE_METHOD')
+        ('화물장치공간 및 화물설명', 'GDS_GOODS_DESCRIPTION_31')
     ]), sub_index_list=[2,3], init_list=['화물장치공간 및 화물설명', 'GDS_GOODS_DESCRIPTION_31'],
         country_list=[('AE', 'UAE'), ('AT', 'Austria'), ('BE', 'Belgium'), ('BY', 'Belarus'),
                       ('CN', 'China'), ('DE', 'Germany'), ('FR', 'France'),

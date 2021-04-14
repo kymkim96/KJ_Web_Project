@@ -1,6 +1,7 @@
 from flask import render_template, jsonify, request
 from flask import current_app as app
 import pandas as pd
+import numpy as np
 import plotly.express as px
 import plotly
 import json
@@ -41,19 +42,22 @@ def plotly_test():
 def plotly_predict():
     id = request.args.get('id')
 
-    plot_json = ''
-    with open("./main/static/model/최종모델.model", 'rb') as f:
-        model = pickle.load(f)
+    # plot_json = ''
 
-        # data = PlotlyController.get_proba(id)
-        # proba_list = [data.iloc[:, 1:].to_numpy()]
-        # df = model.predict_proba(proba_list)
-        # df = df.T
-        # df['class'] = df.index
-        # df.rename({0: 'proba'}, axis=1, inplace=True)
-        # fig = px.pie(df, values='proba', names='class', title='위법물 예측')
-        # plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-
+    # with open("./main/static/model/최종모델.model", 'rb') as f:
+    #     model = pickle.load(f)
+    #
+    #     # data = PlotlyController.get_proba(id)
+    #     # proba_list = [data.iloc[:, 1:].to_numpy()]
+    #     # df = model.predict_proba(proba_list)
+    #     # df = df.T
+    #     # df['class'] = df.index
+    #     # df.rename({0: 'proba'}, axis=1, inplace=True)
+    #     # fig = px.pie(df, values='proba', names='class', title='위법물 예측')
+    #     # plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    df = pd.DataFrame(np.c_[[0.4, 0.6], [0, 1]], columns=['proba', 'class'])
+    fig = px.pie(df, values='proba', names='class', title='위법물 예측')
+    plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return plot_json
 
 
