@@ -17,12 +17,25 @@ def get_data(name, description):
     conn.close()
     return data
 
+# 검증 데이터 생성
 def get_test_data():
     conn = conn_mysqldb()
-    cursor = conn.cursor()
-    sql = "select id from test_set"
-    cursor.execute(sql)
-    data = cursor.fetchall()
+    sql = "select * from test_set"
+    data = pd.read_sql(sql, conn)
+
+    # 레이블 인코딩 및 스케일링
+    with open("./main/static/model/le.model", 'rb') as f:
+        # TODO: 레이블 인코딩
+        pass
+    with open("./main/static/model/sc.model", 'rb') as f:
+        # TODO: 스케일링
+        pass
+
+    # 파생변수 추가
+    sql = "select * from pasang"
+    pasang = pd.read_sql(sql, conn)
+    # TODO: 전처리 데이터에 파생변수 추가
+
     conn.close()
     return data
 
