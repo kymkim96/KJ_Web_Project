@@ -192,83 +192,6 @@
           </div>
           <div class="card-body">
             <div class="my-4 w-100" id="myChart" height="380">
-                <div class="d-inline-flex p-2">
-                    {# 중분류 드롭다운 메뉴 #}
-                    <div class="btn-group shadow-0">
-                      <button
-                        id="mid-class"
-                        type="button"
-                        class="btn btn-link dropdown-toggle"
-                        data-mdb-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        중분류 선택
-                      </button>
-                      <ul class="dropdown-menu">
-                        {% for index, classification in classification_list %}
-                            {% if index in sub_index_list %}
-                                <li><a class="dropdown-item" href="javascript:set_class(true, '{{ classification[0] }}', '{{ classification[1] }}')">{{ classification[0] }}</a></li>
-                            {% else %}
-                                <li><a class="dropdown-item" href="javascript:set_class(false, '{{ classification[0] }}', '{{ classification[1] }}')">{{ classification[0] }}</a></li>
-                            {% endif %}
-                        {% endfor %}
-                      </ul>
-                      <script>
-                          let description = 'ill_count';
-                          let name = '{{ init_list[1] }}';
-                          let title = '{{ init_list[0] }}';
-                          let value = '적발건수';
-                          const set_sub_class = (value_) => {
-                              description = value_;
-                              console.log('description: ', description);
-                              value = event.target.text;
-                              console.log('value: ', value);
-                              $("#low-class").text(event.target.text)
-                          }
-                          const set_class = (index, classification, column_name) => {
-                              if (index) {
-                                  $("#append_location").empty();
-                                  $("#append_location").append('' +
-                                      '<li><a class="dropdown-item" onclick=set_sub_class(\'ill_count\')>적발건수</a></li>' +
-                                      '<li><a class="dropdown-item" onclick=set_sub_class(\'ill_ratio\')>적발률</a></li>'   +
-                                      '<li><a class="dropdown-item" onclick=set_sub_class(\'import_count\')>수입건수</a></li>' +
-                                      '<li><a class="dropdown-item" onclick=set_sub_class(\'fin\')>수입금액</a></li>');
-                              } else {
-                                  $("#append_location").empty();
-                                  $("#append_location").append('' +
-                                      '<li><a class="dropdown-item" onclick=set_sub_class(\'ill_count\')>적발건수</a></li>' +
-                                      '<li><a class="dropdown-item" onclick=set_sub_class(\'ill_ratio\')>적발률</a></li>');
-                              }
-                              name = column_name;
-                              console.log('name: ', name)
-                              title = classification
-                              console.log('title: ', title)
-                              $("#mid-class").text(classification)
-                          }
-                      </script>
-                    </div>
-                    {# 소분류 드롭다운 메뉴 #}
-                    <div class="btn-group shadow-0">
-                      <button
-                        id="low-class"
-                        type="button"
-                        class="btn btn-link dropdown-toggle"
-                        data-mdb-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        소분류 선택
-                      </button>
-                      <ul class="dropdown-menu" id="append_location">
-                        <li><a class="dropdown-item" onclick=set_sub_class('ill_count')>적발건수</a></li>
-                        <li><a class="dropdown-item"  onclick=set_sub_class('ill_ratio')>적발률</a></li>
-                      </ul>
-                    </div>
-                    <button type="button" class="btn btn-outline-primary ms-4" data-mdb-ripple-color="dark" onclick=get_plotly()>
-                      변경
-                    </button>
-                    <span id="error-text" class="ms-4"></span>
-                </div>
-
                 <div id="plotly-origin"></div>
             </div>
 
@@ -276,19 +199,8 @@
                 const get_plotly = () => {
                      $.ajax({
                         method: 'get',
-                        url:'http://192.168.2.22:8090/plotly',
-                        data: {
-                          name,
-                          description,
-                          title,
-                          value,
-                          index: '기본'
-                        },
+                        url:'http://192.168.2.22:8090/plotly-map',
                         success: (data) => {
-                            if (data == "잘못된 접근입니다") {
-                                $("#error-text").text(data)
-                                return;
-                            }
                             let inner_data = JSON.parse(data);
                             const {data: graph, layout} = inner_data;
                             Plotly.newPlot('plotly-origin', graph, layout);
