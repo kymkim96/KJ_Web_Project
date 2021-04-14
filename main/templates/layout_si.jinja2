@@ -220,9 +220,7 @@
                           let value = '적발건수';
                           const set_sub_class = (value_) => {
                               description = value_;
-                              console.log('description: ', description);
                               value = event.target.text;
-                              console.log('value: ', value);
                               $("#low-class").text(event.target.text)
                           }
                           const set_class = (index, classification, column_name) => {
@@ -240,9 +238,7 @@
                                       '<li><a class="dropdown-item" onclick=set_sub_class(\'ill_ratio\')>적발률</a></li>');
                               }
                               name = column_name;
-                              console.log('name: ', name)
                               title = classification
-                              console.log('title: ', title)
                               $("#mid-class").text(classification)
                           }
                       </script>
