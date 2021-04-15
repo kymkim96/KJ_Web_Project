@@ -10,7 +10,6 @@ from ..controller import PlotlyController
 
 @app.route('/')
 def home():
-    # data = PlotlyController.get_test_data()
     return render_template('home.jinja2', active={
         'model': 'active',
         'trd': None,
@@ -24,7 +23,7 @@ def home():
         'rep': None,
         'person': None,
         'nation': None
-    }, test_list=['first', 'second', 'third', 'forth', 'fifth'])
+    })
 
 @app.route('/trd')
 def trd():

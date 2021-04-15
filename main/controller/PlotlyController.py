@@ -1,5 +1,5 @@
 from ..model.config import conn_mysqldb
-from ..util import TestData
+from ..util import preprocessing
 import pandas as pd
 
 
@@ -17,38 +17,36 @@ def get_data(name, description):
     conn.close()
     return data
 
-# 검증 데이터 생성
-def get_test_data():
+# 검증 데이터의 원본 출력
+def get_test_data(id):
     conn = conn_mysqldb()
-    sql = "select * from test_set"
+    sql = f"select * from basedata where id={id}"
+    data = pd.read_sql(sql, conn)
+
+    conn.close()
+    return data
+
+# 검증 데이터 생성
+def get_proba(id):
+    conn = conn_mysqldb()
+    sql = f"select * from basedata where id={id}"
     data = pd.read_sql(sql, conn)
 
     # 레이블 인코딩 및 스케일링
-    with open("./main/static/model/le.model", 'rb') as f:
-        # TODO: 레이블 인코딩
-        pass
-    with open("./main/static/model/sc.model", 'rb') as f:
-        # TODO: 스케일링
-        pass
+    df = preprocessing.inv_df(data)
 
     # 파생변수 추가
-    sql = "select * from pasang"
+    sql = f"select * from pasang where id={id}"
     pasang = pd.read_sql(sql, conn)
-    # TODO: 전처리 데이터에 파생변수 추가
+
+    lgbm_df = df.merge(pasang, how="inner", on="id")
 
     conn.close()
-    return data
+    return lgbm_df
 
-def get_proba(id):
+def get_map(table):
     conn = conn_mysqldb()
-    sql = f"select * from test_set where id={id}"
-    data = pd.read_sql(sql, conn)
-    conn.close()
-    return data
-
-def get_map():
-    conn = conn_mysqldb()
-    sql = f"select * from maps"
+    sql = f"select * from {table}"
     data = pd.read_sql(sql, conn)
     conn.close()
     return data

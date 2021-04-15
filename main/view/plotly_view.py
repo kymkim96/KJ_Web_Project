@@ -5,6 +5,7 @@ import numpy as np
 import plotly.express as px
 import plotly
 import json
+import pickle
 from ..controller import PlotlyController
 
 
@@ -42,30 +43,30 @@ def plotly_test():
 def plotly_predict():
     id = request.args.get('id')
 
-    # plot_json = ''
+    plot_json = ''
 
-    # with open("./main/static/model/최종모델.model", 'rb') as f:
-    #     model = pickle.load(f)
-    #
-    #     # data = PlotlyController.get_proba(id)
-    #     # proba_list = [data.iloc[:, 1:].to_numpy()]
-    #     # df = model.predict_proba(proba_list)
-    #     # df = df.T
-    #     # df['class'] = df.index
-    #     # df.rename({0: 'proba'}, axis=1, inplace=True)
-    #     # fig = px.pie(df, values='proba', names='class', title='위법물 예측')
-    #     # plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    df = pd.DataFrame(np.c_[[0.4, 0.6], [0, 1]], columns=['proba', 'class'])
-    fig = px.pie(df, values='proba', names='class', title='위법물 예측')
-    plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    with open("./main/static/model/re_lgbm_model.model", 'rb') as f:
+        model = pickle.load(f)
+
+        data = PlotlyController.get_proba(id)
+        proba_list = data.iloc[:, 1:].to_numpy()
+        df = model.predict_proba(proba_list)
+        df = pd.DataFrame(df)
+        df = df.T
+        df['class'] = ['위법 아님', '위법']
+        df.rename({0: 'proba'}, axis=1, inplace=True)
+        fig = px.pie(df, values='proba', names='class', title='위법물 예측')
+        plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
     return plot_json
 
 
 @app.route("/plotly-map")
 def plotly_map():
-    data = PlotlyController.get_map()
+    table = request.args.get('table')
+
+    data = PlotlyController.get_map(table)
     plot_map = data.drop(['MyUnknownColumn'], axis=1)
-    print(plot_map)
     fig = px.scatter_geo(plot_map, locations="CountryCode", color="CountryName",
                          hover_name="CountryName", size="pop",
                          projection="natural earth")
