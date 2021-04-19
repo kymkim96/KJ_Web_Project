@@ -235,7 +235,7 @@ def item():
         ('해당품목의 금액 (TJS)', 'COR_FINANCIAL_VALUE'),
         ('해당품목의 금액 단위', 'COR_CURRENCY'),
         ('화물장치공간 및 화물설명', 'GDS_GOODS_DESCRIPTION_31')
-    ]), sub_index_list=[2,3], init_list=['화물장치공간 및 화물설명', 'GDS_GOODS_DESCRIPTION_31'],
+    ]), sub_index_list=[], init_list=['화물장치공간 및 화물설명', 'GDS_GOODS_DESCRIPTION_31'],
         country_list=[('AE', 'UAE'), ('AT', 'Austria'), ('BE', 'Belgium'), ('BY', 'Belarus'),
                       ('CN', 'China'), ('DE', 'Germany'), ('FR', 'France'),
                       ('GE', 'Georgia'), ('HR', 'Croatia'), ('HU', 'Hungary'), ('IN', 'India'),

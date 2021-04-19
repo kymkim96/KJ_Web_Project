@@ -34,7 +34,13 @@ def plotly_test():
     # # print(data)
     # df_cumsum.loc[df_cumsum[column_name] <= baseline]
 
-    fig = px.bar(data[:30], title=title,
+    sequence_ = list()
+    if column_name == 'count':
+        sequence_.append('#0F3290')
+    else:
+        sequence_.append('#0A122E')
+    fig = px.bar(data[:30], title=title, color='variable',
+                 color_discrete_sequence=sequence_,
                  labels={'value': value, 'index': index}, width=800, height=400)
     plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return plot_json
