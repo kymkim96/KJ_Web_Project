@@ -39,8 +39,7 @@ def plotly_test():
         sequence_.append('#0F3290')
     else:
         sequence_.append('#0A122E')
-    fig = px.bar(data[:30], title=title, color='variable',
-                 color_discrete_sequence=sequence_,
+    fig = px.bar(data[:30], title=title,
                  labels={'value': value, 'index': index}, width=800, height=400)
     plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return plot_json
